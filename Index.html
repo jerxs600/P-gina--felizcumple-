@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un pequeño regalo para ti ❤️</title>
+<style>
+*{
+box-sizing:border-box;
+}
+body{
+margin:0;
+background:#050505;
+color:white;
+font-family:Georgia,serif;
+overflow-x:hidden;
+}
+.pantalla{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+h1{
+font-size:32px;
+}
+button{
+padding:15px 30px;
+border:none;
+border-radius:30px;
+background:#ff3366;
+color:white;
+font-size:18px;
+margin:15px;
+cursor:pointer;
+}
+input{
+padding:15px;
+border-radius:20px;
+border:none;
+font-size:18px;
+text-align:center;
+}
+.caja{
+display:none;
+background:white;
+color:#444;
+width:90%;
+max-width:500px;
+padding:30px;
+border-radius:20px;
+text-align:center;
+animation:aparecer 2s;
+}
+.galeria{
+display:none;
+background:white;
+color:#444;
+width:90%;
+max-width:550px;
+padding:25px;
+border-radius:20px;
+text-align:center;
+animation:aparecer 2s;
+}
+.recuerdo{
+background:#fff0f5;
+padding:20px;
+margin:25px 0;
+border-radius:20px;
+}
+.recuerdo img{
+width:100%;
+height:auto;
+max-height:700px;
+object-fit:contain;
+border-radius:15px;
+}
+.final{
+display:none;
+text-align:center;
+}
+.corazon{
+position:fixed;
+top:-20px;
+font-size:25px;
+animation:caer 5s linear infinite;
+}
+@keyframes caer{
+from{
+transform:translateY(-20px);
+}
+to{
+transform:translateY(110vh);
+}
+}
+@keyframes aparecer{
+from{
+opacity:0;
+}
+to{
+opacity:1;
+}
+}
+</style>
+</head>
+<body>
+<audio id="musica" loop>
+<source src="morfina.mp3" type="audio/mpeg">
+</audio>
+<!-- CONTRASEÑA -->
+<div class="pantalla" id="bloqueo">
+<h1>
+🔒 Una sorpresa para ti ❤️
+</h1>
+<p>
+Escribe la contraseña para entrar
+</p>
+<input id="clave" type="password" placeholder="Contraseña">
+<button onclick="entrar()">
+❤️ Entrar
+</button>
+<p id="error"></p>
+</div>
+<!-- INICIO -->
+<div class="pantalla" id="inicio" style="display:none;">
+<h1>
+Hola, cumpleañera hermosa... ❤️
+</h1>
+<p>
+Tengo algo especial para ti...
+</p>
+<button onclick="iniciar()">
+🎵 Empezar sorpresa
+</button>
+</div>
+<!-- CARTA -->
+<div class="caja" id="carta">
+<h2>
+💌 Para ti
+</h2>
+<p>
+Antes que nada quiero decirte feliz cumpleaños.
+Espero que este día esté lleno de momentos bonitos,
+porque alguien tan especial como tú merece sonreír.
+</p>
+<p>
+Gracias por cada risa, cada conversación y cada momento
+que me has permitido compartir contigo.
+</p>
+<p>
+Me gusta la persona que eres y lo especial que te has
+vuelto para mí.
+</p>
+<p>
+Quiero seguir conociéndote, apoyarte y crear muchos
+recuerdos juntos. ❤️
+</p>
+<button onclick="verFotos()">
+📸 Ver recuerdos
+</button>
+</div>
+<!-- FOTOS -->
+<div class="galeria" id="galeria">
+<h2>📸 Nuestros recuerdos</h2>
+<div class="recuerdo">
+<h3>❤️ Recuerdo 1</h3>
+<img src="foto1.jpg">
+<p>Un momento que siempre recordaré.</p>
+</div>
+<div class="recuerdo">
+<h3>🌹 Recuerdo 2</h3>
+<img src="foto2.jpg">
+<p>Gracias por dejarme compartir esto contigo.</p>
+</div>
+<div class="recuerdo">
+<h3>✨ Recuerdo 3</h3>
+<img src="foto3.jpg">
+<p>Espero que vengan muchos recuerdos más.</p>
+</div>
+<button onclick="pregunta()">❤️ Continuar</button>
+</div>
+<!-- FINAL -->
+<div class="final" id="final">
+<h1>Hay algo que quieron decirte...</h1>
+<h2>Pero antes... ❤️</h2>
+<h1>Feliz cumpleaños ❤️</h1>
+<h2>¿Quieres seguir creando recuerdos conmigo? ❤️</h2>
+<button onclick="aceptar()">💖 Sí</button>
+<button onclick="aceptar()">🥰 ¡Sí!</button>
+</div>
+<script>
+function corazones(){
+let c=document.createElement("div");
+c.className="corazon";
+c.innerHTML="❤️";
+c.style.left=Math.random()*100+"%";
+c.style.animationDuration=(3+Math.random()*5)+"s";
+document.body.appendChild(c);
+setTimeout(()=>{c.remove();},5000);
+}
+setInterval(corazones,300);
+function entrar(){
+let clave=document.getElementById("clave").value;
+if(clave=="270707"){
+document.getElementById("bloqueo").style.display="none";
+document.getElementById("inicio").style.display="flex";
+}else{
+document.getElementById("error").innerHTML="❌ Contraseña incorrecta";
+}
+}
+function iniciar(){
+let musica=document.getElementById("musica");
+musica.play();
+document.getElementById("inicio").innerHTML=`
+<h1>La sorpresa comienza... ❤️</h1>
+<button onclick="abrir()">🎁 Abrir mi regalo</button>
+`;
+}
+function abrir(){
+document.getElementById("inicio").style.display="none";
+document.getElementById("carta").style.display="block";
+}
+function verFotos(){
+document.getElementById("carta").style.display="none";
+document.getElementById("galeria").style.display="block";
+}
+function pregunta(){
+document.getElementById("galeria").style.display="none";
+document.getElementById("final").style.display="block";
+}
+function aceptar(){
+document.body.innerHTML=`
+<div class="pantalla">
+<h1>Ojalá tuviera 5 vidas distintas en lugar de una, en lugar de un pueblo habría nacido en 5 familias distintas, y cada una prepararía diferente comida y al crecer tendría 5 empleos distintos… y en cada una de esas vidas, me habría enamorado de la misma persona ❤️</h1>
+<h2>El significado de esta frase es:</h2>
+<p>Habla de un amor que trasciende cualquier circunstancia. La persona imagina tener vidas completamente diferentes: otros lugares, otra familia, otros caminos... pero en todas esas posibilidades terminaría eligiendo a la misma persona.<br><br>No importa cómo cambie mi vida o qué camino tome, mi corazón siempre te elegiría a ti.<br><br>Te quiero mucho, Majito. Feliz cumpleaños ❤️❤️❤️</p>
+</div>
+`;
+}
+</script>
+</body>
+</html>
